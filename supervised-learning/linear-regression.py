@@ -15,7 +15,7 @@ class LinearRegressionUsingGradientDescent:
     cost : total error of the model after each iteration
     """
 
-    def __init__(self, learningParamenter=0.1, numberOfIterations=290):
+    def __init__(self, learningParamenter=0.1, numberOfIterations=2):
       self.learningParamenter = learningParamenter
       self.numberOfIterations = numberOfIterations
 
@@ -38,6 +38,7 @@ class LinearRegressionUsingGradientDescent:
 
       for _ in range(self.numberOfIterations):
         yPred = np.dot(x, self.weight)
+        print(yPred)
         residuals = yPred - y
         gradientVector = np.dot(x.T, residuals)
         self.weight -= (self.learningParamenter / m) * gradientVector
@@ -60,7 +61,7 @@ class LinearRegressionUsingGradientDescent:
 
 # generate random data-set
 np.random.seed(0)
-x = np.random.rand(100, 1)
+x = np.random.rand(5, 1)
 y =  25 * x
 
 # model
@@ -73,4 +74,4 @@ plt.scatter(x, y, s=10)
 plt.plot(x, trainedModel.predict(x))
 plt.xlabel('x')
 plt.ylabel('y')
-plt.show()
+# plt.show()
