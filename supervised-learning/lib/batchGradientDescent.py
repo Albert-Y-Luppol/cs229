@@ -5,8 +5,10 @@ class BatchGradientDescent:
     self.learningRateAlpha = learningRateAlpha
 
   def countWeightParams(self, x, y, options = {}):
-    #  (printFinalTheta, printCostInitial, printCostFinal) = options
     amountOfTrainingSetsM = x.shape[0]
+    repeatLearningNOfTimes = amountOfTrainingSetsM
+    if(options.get('repeatLearningNofTimes')):
+      repeatLearningNOfTimes = options.get('repeatLearningNofTimes')
     x0 = np.ones((amountOfTrainingSetsM, 1))
     x = np.hstack((x0, x))
     # print(x)
@@ -14,7 +16,7 @@ class BatchGradientDescent:
     # print(self.weightTheta)
     self.costJi = []
     self.__countCost(x, y)
-    for _ in range(amountOfTrainingSetsM):
+    for _ in range(repeatLearningNOfTimes):
       hypotheses = np.dot(x, self.weightTheta)
       # print(hypotheses)
       # print(np.dot((hypotheses - y).T, x).T) # x*r => xT (dot) r
